@@ -328,11 +328,49 @@ function renderTrendChart() {
   });
 }
 
+// --- Hamburger Menu --------------------------------------------------------
+function initHamburger() {
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks  = document.getElementById('nav-links');
+  if (!hamburger || !navLinks) return;
+
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.setAttribute('aria-label', 'Open navigation menu');
+  }
+
+  hamburger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
+    hamburger.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+  });
+
+  // Close menu when a nav link is clicked
+  navLinks.querySelectorAll('.nav-link-item').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close menu on outside click
+  document.addEventListener('click', (e) => {
+    if (!navLinks.contains(e.target) && e.target !== hamburger) closeMenu();
+  });
+
+  // Close menu if window resizes to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) closeMenu();
+  });
+}
+
 // --- Bootstrap --------------------------------------------------------------
 function init() {
   createYearButtons();
   updateUI(currentYear);
   renderTrendChart();
+  initHamburger();
 }
 
 if (document.readyState === 'loading') {

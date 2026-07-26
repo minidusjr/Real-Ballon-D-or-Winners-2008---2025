@@ -25,10 +25,13 @@
   <!-- ===== Navigation ===== -->
   <nav role="navigation" aria-label="Main navigation">
     <a href="#" class="nav-logo serif">MINIDU<span>SATHSARA</span></a>
-    <div class="nav-links">
-      <a href="#explorer">Explorer</a>
-      <a href="#trends">Trends</a>
-      <a href="#algorithm">The Algorithm</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-links">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="nav-links" id="nav-links">
+      <a href="#explorer" class="nav-link-item">Explorer</a>
+      <a href="#trends" class="nav-link-item">Trends</a>
+      <a href="#algorithm" class="nav-link-item">The Algorithm</a>
     </div>
   </nav>
 
@@ -73,7 +76,7 @@
           <span id="display-year" aria-hidden="true"></span>
         </div>
 
-        <div class="chart-container" style="height:450px">
+        <div class="chart-container radar-chart-container">
           <canvas id="radarChart" aria-label="Radar chart comparing player statistics" role="img"></canvas>
         </div>
 
